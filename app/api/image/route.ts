@@ -18,21 +18,22 @@ export const GET = async (req: Request, res: Response) => {
     return new Response('Error: no address', { status: 400 });
   }
   let accountAddress = '';
-  /*
   try {
     const body: { trustedData?: { messageBytes?: string } } = await req.json();
+    console.log(JSON.stringify(body, null, 2));
     accountAddress = await getFrameAccountAddress(body, {
       NEYNAR_API_KEY: process.env.NEYNAR_API_KEY,
     });
+    console.log(address);
   } catch (err) {
     console.error(err);
-  }*/
+  }
   const farcasterIdentity = await getFarcasterIdentity(address);
   if (!farcasterIdentity) {
     return new Response('Error: no farcaster identity found', { status: 400 });
   }
 
-  /*const erc20InCommon = await Promise.all([
+  const erc20InCommon = await Promise.all([
     fetchERC20InCommon('limone.eth', accountAddress || 'betashop.eth', TokenBlockchain.Ethereum),
     fetchERC20InCommon('limone.eth', accountAddress || 'betashop.eth', TokenBlockchain.Polygon),
     fetchERC20InCommon('limone.eth', accountAddress || 'betashop.eth', TokenBlockchain.Base),
@@ -52,8 +53,8 @@ export const GET = async (req: Request, res: Response) => {
     'limone.eth',
     accountAddress || 'betashop.eth',
   );
-  console.log({ erc20InCommon, nftsInCommon, poapsInCommon, farcasterFollowingsInCommon });*/
-  const erc20InCommon = [
+  console.log({ erc20InCommon, nftsInCommon, poapsInCommon, farcasterFollowingsInCommon });
+  /*const erc20InCommon = [
     { chain: TokenBlockchain.Ethereum, value: 2 },
     { chain: TokenBlockchain.Polygon, value: 0 },
     { chain: TokenBlockchain.Base, value: 10 },
@@ -66,7 +67,7 @@ export const GET = async (req: Request, res: Response) => {
     { chain: TokenBlockchain.Zora, value: 1 },
   ];
   const poapsInCommon = 13;
-  const farcasterFollowingsInCommon = 125;
+  const farcasterFollowingsInCommon = 125;*/
 
   const svg = await generateImageSvg(
     {
