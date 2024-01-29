@@ -12,6 +12,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     console.error(err);
   }
 
+  if (!accountAddress) {
+    return new NextResponse('Error: invalid address', { status: 400 });
+  }
+
   const address =
     accountAddress === '0x1358155a15930f89ebc787a34eb4ccfd9720bc62'
       ? accountAddress

@@ -2,7 +2,7 @@ import { getFrameMetadata } from '@coinbase/onchainkit';
 import type { Metadata } from 'next';
 
 const frameMetadata = getFrameMetadata({
-  buttons: ['ofc 🍋', "idk let's see 👀", 'who da fk are u?'],
+  buttons: ['ofc 🍋', "idk let's see 👀", "who da fk are u again!?🙄"],
   image: 'https://are-we-frens-frame.vercel.app/base-img.png',
   post_url: 'https://are-we-frens-frame.vercel.app/api/frame',
 });
