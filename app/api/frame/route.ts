@@ -5,17 +5,20 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   let accountAddress = '';
   try {
     const body: { trustedData?: { messageBytes?: string } } = await req.json();
-    console.log(JSON.stringify(body, null, 2));
     accountAddress = await getFrameAccountAddress(body, {
       NEYNAR_API_KEY: process.env.NEYNAR_API_KEY,
     });
-    console.log(accountAddress);
   } catch (err) {
     console.error(err);
   }
+
+  const address =
+    accountAddress === '0x1358155a15930f89ebc787a34eb4ccfd9720bc62'
+      ? accountAddress
+      : 'betashop.eth';
   return new NextResponse(`<!DOCTYPE html><html><head>
     <meta property="fc:frame" content="vNext" />
-    <meta property="fc:frame:image" content="https://are-we-frens-frame.vercel.app/api/image?address=betashop.eth" />
+    <meta property="fc:frame:image" content="https://are-we-frens-frame.vercel.app/api/image?address=${address}" />
   </head></html>`);
 }
 
