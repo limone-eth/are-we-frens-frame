@@ -9,8 +9,7 @@ import sharp from 'sharp';
 import { generateImageSvg } from '../../lib/svg';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
-  let accountAddress = '';
-  /*
+  /*let accountAddress = '';
   try {
     const body: { trustedData?: { messageBytes?: string } } = await req.json();
     accountAddress = await getFrameAccountAddress(body, {
@@ -19,48 +18,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   } catch (err) {
     console.error(err);
   }*/
-  /*const erc20InCommon = await Promise.all([
-    fetchERC20InCommon('limone.eth', accountAddress || 'betashop.eth', TokenBlockchain.Ethereum),
-    fetchERC20InCommon('limone.eth', accountAddress || 'betashop.eth', TokenBlockchain.Polygon),
-    fetchERC20InCommon('limone.eth', accountAddress || 'betashop.eth', TokenBlockchain.Base),
-    fetchERC20InCommon('limone.eth', accountAddress || 'betashop.eth', TokenBlockchain.Zora),
-  ]);
-
-  const nftsInCommon = await Promise.all([
-    fetchNFTsInCommon('limone.eth', accountAddress || 'betashop.eth', TokenBlockchain.Ethereum),
-    fetchNFTsInCommon('limone.eth', accountAddress || 'betashop.eth', TokenBlockchain.Polygon),
-    fetchNFTsInCommon('limone.eth', accountAddress || 'betashop.eth', TokenBlockchain.Base),
-    fetchNFTsInCommon('limone.eth', accountAddress || 'betashop.eth', TokenBlockchain.Zora),
-  ]);
-
-  const poapsInCommon = await fetchPOAPsInCommon('limone.eth', accountAddress || 'betashop.eth');
-
-  const farcasterFollowingsInCommon = await fetchFarcasterFollowingsInCommon(
-    'limone.eth',
-    accountAddress || 'betashop.eth',
-  );
-  console.log({ erc20InCommon, nftsInCommon, poapsInCommon, farcasterFollowingsInCommon });*/
-  const erc20InCommon = [2, 3, 4, 5];
-  const nftsInCommon = [2, 0, 10, 50];
-  const poapsInCommon = 13;
-  const farcasterFollowingsInCommon = 125;
-
-  const svg = await generateImageSvg(
-    erc20InCommon,
-    nftsInCommon,
-    poapsInCommon,
-    farcasterFollowingsInCommon,
-  );
-
-  // Convert SVG to PNG using Sharp
-  const pngBuffer = await sharp(Buffer.from(svg)).toFormat('png').toBuffer();
-  // Set the content type to PNG and send the response
-  res.setHeader('Content-Type', 'image/png');
-  res.setHeader('Cache-Control', 'max-age=10');
-  res.send(pngBuffer);
   return new NextResponse(`<!DOCTYPE html><html><head>
     <meta property="fc:frame" content="vNext" />
-    <meta property="fc:frame:image" content="https://lemon-frame.vercel.app/img-2.png" />
+    <meta property="fc:frame:image" content="https://are-we-frens-frame.vercel.app/api/image?address=betashop.eth" />
   </head></html>`);
 }
 
