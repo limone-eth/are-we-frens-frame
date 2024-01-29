@@ -23,7 +23,7 @@ const Grid: React.FC<GridProps> = ({ erc20, nfts, poaps, farcasterFollowings }) 
     >
       <div style={{ display: 'flex' }}>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '1rem' }}>
-          <div style={{ fontSize: '32px' }}>erc20</div>
+          <div style={{ fontSize: '28px' }}>erc20</div>
           <div style={{ display: 'flex', flexDirection: 'row', gap: '0.5rem' }}>
             {erc20.map((item, index) => (
               <div
@@ -43,7 +43,7 @@ const Grid: React.FC<GridProps> = ({ erc20, nfts, poaps, farcasterFollowings }) 
       </div>
       <div style={{ display: 'flex' }}>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '1rem' }}>
-          <div style={{ fontSize: '32px', marginRight: '28px', blockSize: '1' }}>nfts </div>
+          <div style={{ fontSize: '28px', marginRight: '28px', blockSize: '1' }}>nfts </div>
           <div style={{ display: 'flex', flexDirection: 'row', gap: '0.5rem' }}>
             {nfts.map((item, index) => (
               <div
@@ -62,7 +62,7 @@ const Grid: React.FC<GridProps> = ({ erc20, nfts, poaps, farcasterFollowings }) 
         </div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '1rem' }}>
-        <div style={{ fontSize: '32px', marginRight: '6px' }}>poaps</div>
+        <div style={{ fontSize: '28px', marginRight: '6px' }}>poaps</div>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           {/*<img
               src={`${process.env.BASE_URL}/${poaps.logo}`}
@@ -75,7 +75,7 @@ const Grid: React.FC<GridProps> = ({ erc20, nfts, poaps, farcasterFollowings }) 
       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '1rem' }}>
         <div
           style={{
-            fontSize: '32px',
+            fontSize: '28px',
             marginRight: '6px',
             display: 'flex',
             flexDirection: 'column',
