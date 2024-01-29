@@ -1,5 +1,4 @@
 import { getFrameAccountAddress } from '@coinbase/onchainkit';
-import { NextRequest, NextResponse } from 'next/server';
 import { fetchERC20InCommon } from '../../lib/airstack/erc20-in-common';
 import { TokenBlockchain } from '../../lib/airstack/types';
 import { fetchNFTsInCommon } from '../../lib/airstack/nfts-in-common';
@@ -7,8 +6,17 @@ import { fetchPOAPsInCommon } from '../../lib/airstack/poaps-in-common';
 import { fetchFarcasterFollowingsInCommon } from '../../lib/airstack/fc-followings-in-common';
 import sharp from 'sharp';
 import { generateImageSvg } from '../../lib/svg';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { computeScore } from '../../lib/score';
+import { getFarcasterIdentity } from '../../lib/web3-bio';
 
-async function getResponse(req: NextRequest): Promise<NextResponse> {
+export const GET = async (req: Request, res: Response) => {
+  const { searchParams } = new URL(req.url);
+  console.log(searchParams);
+  const address = searchParams.get('address') ?? undefined;
+  if (!address) {
+    return new Response('Error: no address', { status: 400 });
+  }
   let accountAddress = '';
   /*
   try {
@@ -19,6 +27,11 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   } catch (err) {
     console.error(err);
   }*/
+  const farcasterIdentity = await getFarcasterIdentity(address);
+  if (!farcasterIdentity) {
+    return new Response('Error: no farcaster identity found', { status: 400 });
+  }
+
   /*const erc20InCommon = await Promise.all([
     fetchERC20InCommon('limone.eth', accountAddress || 'betashop.eth', TokenBlockchain.Ethereum),
     fetchERC20InCommon('limone.eth', accountAddress || 'betashop.eth', TokenBlockchain.Polygon),
@@ -40,32 +53,48 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     accountAddress || 'betashop.eth',
   );
   console.log({ erc20InCommon, nftsInCommon, poapsInCommon, farcasterFollowingsInCommon });*/
-  const erc20InCommon = [2, 3, 4, 5];
-  const nftsInCommon = [2, 0, 10, 50];
+  const erc20InCommon = [
+    { chain: TokenBlockchain.Ethereum, value: 2 },
+    { chain: TokenBlockchain.Polygon, value: 0 },
+    { chain: TokenBlockchain.Base, value: 10 },
+    { chain: TokenBlockchain.Zora, value: 50 },
+  ];
+  const nftsInCommon = [
+    { chain: TokenBlockchain.Ethereum, value: 2 },
+    { chain: TokenBlockchain.Polygon, value: 52 },
+    { chain: TokenBlockchain.Base, value: 13 },
+    { chain: TokenBlockchain.Zora, value: 1 },
+  ];
   const poapsInCommon = 13;
   const farcasterFollowingsInCommon = 125;
 
   const svg = await generateImageSvg(
+    {
+      imageUrl: farcasterIdentity.avatar,
+      username: farcasterIdentity.identity,
+    },
     erc20InCommon,
     nftsInCommon,
     poapsInCommon,
     farcasterFollowingsInCommon,
+    computeScore(
+      erc20InCommon.map((t) => t.value).reduce((a, b) => a + b, 0),
+      nftsInCommon.map((t) => t.value).reduce((a, b) => a + b, 0),
+      poapsInCommon,
+      farcasterFollowingsInCommon,
+    ),
   );
 
   // Convert SVG to PNG using Sharp
   const pngBuffer = await sharp(Buffer.from(svg)).toFormat('png').toBuffer();
-  // Set the content type to PNG and send the response
-  res.setHeader('Content-Type', 'image/png');
-  res.setHeader('Cache-Control', 'max-age=10');
-  res.send(pngBuffer);
-  return new NextResponse(`<!DOCTYPE html><html><head>
-    <meta property="fc:frame" content="vNext" />
-    <meta property="fc:frame:image" content="https://lemon-frame.vercel.app/img-2.png" />
-  </head></html>`);
-}
 
-export async function POST(req: NextRequest): Promise<Response> {
-  return getResponse(req);
-}
+  // Set the content type to PNG and send the response
+  return new Response(pngBuffer, {
+    headers: {
+      'Content-Type': 'image/png',
+      'Cache-Control': 'max-age=10',
+    },
+  });
+};
 
 export const dynamic = 'force-dynamic';
