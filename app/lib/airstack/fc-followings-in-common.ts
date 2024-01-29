@@ -40,8 +40,6 @@ export const fetchFarcasterFollowingsInCommon = async (a: string, b: string): Pr
     a,
     b,
   });
-  console.log('here');
-  console.log(response);
   return response
     .filter(Boolean)
     .flatMap((x) => x.SocialFollowings)

@@ -54,7 +54,6 @@ export const fetchAllPagesQuery = async <T>(
 
     // Store the data from the current page
     allData.push(response?.data);
-    // console.log(allData.length)
   }
 
   return allData;

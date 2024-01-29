@@ -17,41 +17,29 @@ export const GET = async (req: Request, res: Response) => {
   if (!address) {
     return new Response('Error: no address', { status: 400 });
   }
-  let accountAddress = '';
-  try {
-    const body: { trustedData?: { messageBytes?: string } } = await req.json();
-    console.log(JSON.stringify(body, null, 2));
-    accountAddress = await getFrameAccountAddress(body, {
-      NEYNAR_API_KEY: process.env.NEYNAR_API_KEY,
-    });
-    console.log(address);
-  } catch (err) {
-    console.error(err);
-  }
   const farcasterIdentity = await getFarcasterIdentity(address);
   if (!farcasterIdentity) {
     return new Response('Error: no farcaster identity found', { status: 400 });
   }
-
   const erc20InCommon = await Promise.all([
-    fetchERC20InCommon('limone.eth', accountAddress || 'betashop.eth', TokenBlockchain.Ethereum),
-    fetchERC20InCommon('limone.eth', accountAddress || 'betashop.eth', TokenBlockchain.Polygon),
-    fetchERC20InCommon('limone.eth', accountAddress || 'betashop.eth', TokenBlockchain.Base),
-    fetchERC20InCommon('limone.eth', accountAddress || 'betashop.eth', TokenBlockchain.Zora),
+    fetchERC20InCommon('limone.eth', address || 'betashop.eth', TokenBlockchain.Ethereum),
+    fetchERC20InCommon('limone.eth', address || 'betashop.eth', TokenBlockchain.Polygon),
+    fetchERC20InCommon('limone.eth', address || 'betashop.eth', TokenBlockchain.Base),
+    fetchERC20InCommon('limone.eth', address || 'betashop.eth', TokenBlockchain.Zora),
   ]);
 
   const nftsInCommon = await Promise.all([
-    fetchNFTsInCommon('limone.eth', accountAddress || 'betashop.eth', TokenBlockchain.Ethereum),
-    fetchNFTsInCommon('limone.eth', accountAddress || 'betashop.eth', TokenBlockchain.Polygon),
-    fetchNFTsInCommon('limone.eth', accountAddress || 'betashop.eth', TokenBlockchain.Base),
-    fetchNFTsInCommon('limone.eth', accountAddress || 'betashop.eth', TokenBlockchain.Zora),
+    fetchNFTsInCommon('limone.eth', address || 'betashop.eth', TokenBlockchain.Ethereum),
+    fetchNFTsInCommon('limone.eth', address || 'betashop.eth', TokenBlockchain.Polygon),
+    fetchNFTsInCommon('limone.eth', address || 'betashop.eth', TokenBlockchain.Base),
+    fetchNFTsInCommon('limone.eth', address || 'betashop.eth', TokenBlockchain.Zora),
   ]);
 
-  const poapsInCommon = await fetchPOAPsInCommon('limone.eth', accountAddress || 'betashop.eth');
+  const poapsInCommon = await fetchPOAPsInCommon('limone.eth', address || 'betashop.eth');
 
   const farcasterFollowingsInCommon = await fetchFarcasterFollowingsInCommon(
     'limone.eth',
-    accountAddress || 'betashop.eth',
+    address || 'betashop.eth',
   );
   console.log({ erc20InCommon, nftsInCommon, poapsInCommon, farcasterFollowingsInCommon });
   /*const erc20InCommon = [
