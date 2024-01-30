@@ -24,6 +24,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     console.error(err);
   }
 
+  console.log({ accountAddress, username });
   if (!accountAddress || !username) {
     return new NextResponse(`<!DOCTYPE html><html><head>
     <meta property="fc:frame" content="vNext" />
@@ -34,16 +35,20 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   }
   const image = await readImage(accountAddress);
   if (!image) {
+    console.log('no image', accountAddress);
     return new NextResponse('Error: no image', { status: 400 });
   }
   const didClaim = await hasClaimed(accountAddress);
   if (didClaim) {
+    console.log('already claimed', accountAddress);
     return new NextResponse(`<!DOCTYPE html><html><head>
     <meta property="fc:frame" content="vNext" />
     <meta property="fc:frame:image" content="${SUCCESS_IMAGE_URL}" />
     </head></html>`);
   }
+  console.log('claiming', accountAddress);
   await claimNFT(accountAddress!, username!, image);
+  console.log('claimed', accountAddress);
   return new NextResponse(`<!DOCTYPE html><html><head>
     <meta property="fc:frame" content="vNext" />
     <meta property="fc:frame:image" content="${SUCCESS_IMAGE_URL}" />

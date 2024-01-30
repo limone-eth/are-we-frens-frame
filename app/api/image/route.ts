@@ -20,9 +20,8 @@ export const GET = async (req: Request, res: Response) => {
     return new Response('Error: no farcaster identity found', { status: 400 });
   }
 
-  /*const followedByOnFarcaster = await isFollowingOnFarcaster('limone.eth', address);
+  const followedByOnFarcaster = await isFollowingOnFarcaster('limone.eth', address);
   const followingOnFarcaster = await isFollowingOnFarcaster(address, 'limone.eth');
-  console.log({ followedByOnFarcaster, followingOnFarcaster });
   const nftsInCommon = await Promise.all([
     fetchNFTsInCommon('limone.eth', address, TokenBlockchain.Ethereum),
     fetchNFTsInCommon('limone.eth', address, TokenBlockchain.Polygon),
@@ -33,8 +32,7 @@ export const GET = async (req: Request, res: Response) => {
   const poapsInCommon = await fetchPOAPsInCommon('limone.eth', address);
 
   const farcasterFollowingsInCommon = await fetchFarcasterFollowingsInCommon('limone.eth', address);
-  console.log({ nftsInCommon, poapsInCommon, farcasterFollowingsInCommon });*/
-  const followedByOnFarcaster = true;
+  /*const followedByOnFarcaster = true;
   const followingOnFarcaster = false;
 
   const nftsInCommon = [
@@ -46,7 +44,7 @@ export const GET = async (req: Request, res: Response) => {
   const poapsInCommon = 13;
   const farcasterFollowingsInCommon = 125;
 
-  console.log(farcasterIdentity);
+  console.log(farcasterIdentity);*/
 
   const svg = await generateImageSvg(
     {
