@@ -13,6 +13,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     console.error(err);
   }
 
+  console.log({accountAddress});
+
   if (!accountAddress) {
     return new NextResponse('Error: invalid address', { status: 400 });
   }
