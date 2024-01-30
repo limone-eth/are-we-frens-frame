@@ -25,6 +25,13 @@ export default function Page() {
   return (
     <>
       <h1>are we frens?</h1>
+      <h2>seriously, are we?</h2>
+      <p>
+        powered by{' '}
+        <a href="https://warpcast.com/limone.eth" target="_blank">
+          limone.eth
+        </a>
+      </p>
     </>
   );
 }

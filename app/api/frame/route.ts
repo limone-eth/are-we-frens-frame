@@ -24,9 +24,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   return new NextResponse(`<!DOCTYPE html><html><head>
     <meta property="fc:frame" content="vNext" />
-    <meta property="fc:frame:image" content="https://${BASE_URL}/api/image?address=${address}" />
+    <meta property="fc:frame:image" content="${BASE_URL}/api/image?address=${address}" />
     <meta property="fc:frame:button:1" content="mint on base 🔵" />
-    <meta property="fc:frame:post_url" content="https://${BASE_URL}/api/mint" />
+    <meta property="fc:frame:post_url" content="${BASE_URL}/api/mint" />
   </head></html>`);
 }
 
