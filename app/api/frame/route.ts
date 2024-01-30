@@ -13,7 +13,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     console.error(err);
   }
 
-  console.log({accountAddress});
+  console.log({ accountAddress });
 
   if (!accountAddress) {
     return new NextResponse('Error: invalid address', { status: 400 });
@@ -21,8 +21,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   const address =
     accountAddress === '0x1358155a15930f89ebc787a34eb4ccfd9720bc62'
-      ? accountAddress
-      : 'betashop.eth';
+      ? 'betashop.eth'
+      : accountAddress;
 
   return new NextResponse(`<!DOCTYPE html><html><head>
     <meta property="fc:frame" content="vNext" />
