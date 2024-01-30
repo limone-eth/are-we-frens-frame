@@ -28,7 +28,7 @@ export const generateImageSvg = async (profile: Profile, score: string): Promise
         backgroundColor: '#BDE86B',
         display: 'flex',
         flexDirection: 'column',
-        padding: '2rem',
+        padding: '3.5rem',
         width: '100%',
         height: '100%',
         alignContent: 'center',
@@ -49,8 +49,8 @@ export const generateImageSvg = async (profile: Profile, score: string): Promise
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '2rem',
-          marginTop: '32px',
+          gap: '1rem',
+          marginTop: '20px',
         }}
       >
         <div
@@ -65,10 +65,10 @@ export const generateImageSvg = async (profile: Profile, score: string): Promise
           <Avatar
             imageUrl={`${process.env.BASE_URL}/limone-pfp.png`}
             username="limone.eth"
-            size="96px"
+            size="84px"
           />
           <div style={{ fontSize: '24px' }}>&</div>
-          <Avatar imageUrl={profile.imageUrl} username={profile.username} size="96px" />
+          <Avatar imageUrl={profile.imageUrl} username={profile.username} size="84px" />
         </div>
         <div
           style={{
@@ -89,9 +89,9 @@ export const generateImageSvg = async (profile: Profile, score: string): Promise
             }}
           >
             {score}
-            <span style={{ fontSize: '32px' }}>/10</span>
+            <span style={{ fontSize: '28px' }}>/10</span>
           </div>
-          <div style={{ fontSize: '32px' }}>frens score</div>
+          <div style={{ fontSize: '28px' }}>frens score</div>
         </div>
       </div>
       <span
