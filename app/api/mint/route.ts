@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { claimNFT } from '../../lib/thirdweb';
-import { hasClaimed, readImage, setClaimed } from '../../lib/redis';
+import { alreadyClaimed, claimNFT } from '../../lib/thirdweb';
+import { readImage, setClaimed } from '../../lib/redis';
 import { NeynarAPIClient } from '@neynar/nodejs-sdk';
 import { getFrameAccountAddress } from '@coinbase/onchainkit';
 import { BASE_URL, INITIAL_IMAGE_URL, SUCCESS_IMAGE_URL } from '../../constants';
@@ -19,13 +19,11 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     if (!validateFrameAction) {
       throw new Error('Invalid frame action');
     }
-    console.log({ validateFrameAction });
     username = validateFrameAction.action?.interactor.username!;
   } catch (err) {
     console.error(err);
   }
 
-  console.log({ accountAddress, username });
   if (!accountAddress || !username) {
     return new NextResponse(`<!DOCTYPE html><html><head>
     <meta property="fc:frame" content="vNext" />
@@ -39,7 +37,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     console.log('no image', accountAddress);
     return new NextResponse('Error: no image', { status: 400 });
   }
-  const didClaim = await hasClaimed(accountAddress);
+  const didClaim = await alreadyClaimed(accountAddress);
   if (didClaim) {
     console.log('already claimed', accountAddress);
     return new NextResponse(`<!DOCTYPE html><html><head>
