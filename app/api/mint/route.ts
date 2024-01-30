@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { claimNFT } from '../../lib/thirdweb';
-import { hasClaimed, readImage } from '../../lib/redis';
+import { hasClaimed, readImage, setClaimed } from '../../lib/redis';
 import { NeynarAPIClient } from '@neynar/nodejs-sdk';
 import { getFrameAccountAddress } from '@coinbase/onchainkit';
 import { BASE_URL, INITIAL_IMAGE_URL, SUCCESS_IMAGE_URL } from '../../constants';
@@ -49,6 +49,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   }
   console.log('claiming', accountAddress);
   await claimNFT(accountAddress!, username!, image);
+  await setClaimed(accountAddress);
   console.log('claimed', accountAddress);
   return new NextResponse(`<!DOCTYPE html><html><head>
     <meta property="fc:frame" content="vNext" />
