@@ -23,7 +23,7 @@ const Grid: React.FC<GridProps> = ({ erc20, nfts, poaps, farcasterFollowings }) 
     >
       <div style={{ display: 'flex' }}>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '1rem' }}>
-          <div style={{ fontSize: '28px' }}>erc20</div>
+          <div style={{ fontSize: '24px' }}>erc20</div>
           <div style={{ display: 'flex', flexDirection: 'row', gap: '0.5rem' }}>
             {erc20.map((item, index) => (
               <div
@@ -35,7 +35,7 @@ const Grid: React.FC<GridProps> = ({ erc20, nfts, poaps, farcasterFollowings }) 
                   alt="logo"
                   style={{ width: '36px', height: '36px' }}
                 />
-                <span style={{ marginTop: '4px', fontSize: '24px' }}>{item.number}</span>
+                <span style={{ marginTop: '4px', fontSize: '20px' }}>{item.number}</span>
               </div>
             ))}
           </div>
@@ -43,7 +43,7 @@ const Grid: React.FC<GridProps> = ({ erc20, nfts, poaps, farcasterFollowings }) 
       </div>
       <div style={{ display: 'flex' }}>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '1rem' }}>
-          <div style={{ fontSize: '28px', marginRight: '28px', blockSize: '1' }}>nfts </div>
+          <div style={{ fontSize: '24px', marginRight: '28px', blockSize: '1' }}>nfts </div>
           <div style={{ display: 'flex', flexDirection: 'row', gap: '0.5rem' }}>
             {nfts.map((item, index) => (
               <div
@@ -55,27 +55,27 @@ const Grid: React.FC<GridProps> = ({ erc20, nfts, poaps, farcasterFollowings }) 
                   alt="logo"
                   style={{ width: '36px', height: '36px' }}
                 />
-                <span style={{ marginTop: '4px', fontSize: '24px' }}>{item.number}</span>
+                <span style={{ marginTop: '4px', fontSize: '20px' }}>{item.number}</span>
               </div>
             ))}
           </div>
         </div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '1rem' }}>
-        <div style={{ fontSize: '28px', marginRight: '6px' }}>poaps</div>
+        <div style={{ fontSize: '24px', marginRight: '6px' }}>poaps</div>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           {/*<img
               src={`${process.env.BASE_URL}/${poaps.logo}`}
               alt="logo"
               style={{ width: '36px', height: '36px' }}
             />*/}
-          <span style={{ marginTop: '4px', fontSize: '24px' }}>{poaps.number}</span>
+          <span style={{ marginTop: '4px', fontSize: '20px' }}>{poaps.number}</span>
         </div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '1rem' }}>
         <div
           style={{
-            fontSize: '28px',
+            fontSize: '24px',
             marginRight: '6px',
             display: 'flex',
             flexDirection: 'column',
@@ -90,7 +90,7 @@ const Grid: React.FC<GridProps> = ({ erc20, nfts, poaps, farcasterFollowings }) 
           alt="logo"
           style={{ width: '36px', height: '36px' }}
           />*/}
-          <span style={{ marginTop: '4px', fontSize: '24px' }}>{farcasterFollowings.number}</span>
+          <span style={{ marginTop: '4px', fontSize: '20px' }}>{farcasterFollowings.number}</span>
         </div>
       </div>
     </div>

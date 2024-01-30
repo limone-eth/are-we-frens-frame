@@ -20,9 +20,12 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     accountAddress === '0x1358155a15930f89ebc787a34eb4ccfd9720bc62'
       ? accountAddress
       : 'betashop.eth';
+
   return new NextResponse(`<!DOCTYPE html><html><head>
     <meta property="fc:frame" content="vNext" />
     <meta property="fc:frame:image" content="https://are-we-frens-frame.vercel.app/api/image?address=${address}" />
+    <meta property="fc:frame:button:1" content="mint on base 🔵" />
+    <meta property="fc:frame:post_url" content="https://airstack-frame.vercel.app/api/mint" />
   </head></html>`);
 }
 

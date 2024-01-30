@@ -857,6 +857,7 @@ export type Social = {
   profileUrl: Maybe<Scalars['String']['output']>;
   tokenNft: Maybe<TokenNft>;
   twitterUserName: Maybe<Scalars['String']['output']>;
+  updatedAt: Maybe<Scalars['Time']['output']>;
   userAddress: Maybe<Scalars['Address']['output']>;
   userAddressDetails: Maybe<Wallet>;
   userAssociatedAddressDetails: Maybe<Array<Wallet>>;
@@ -917,6 +918,7 @@ export type SocialFilter = {
   isDefault: InputMaybe<Boolean_Comparator_Exp>;
   profileCreatedAtBlockTimestamp: InputMaybe<Time_Comparator_Exp>;
   profileName: InputMaybe<Regex_String_Comparator_Exp>;
+  updatedAt: InputMaybe<Time_Comparator_Exp>;
   userAssociatedAddresses: InputMaybe<Address_Comparator_Exp>;
   userId: InputMaybe<String_Comparator_Exp>;
 };
@@ -1029,6 +1031,7 @@ export type SocialOrderBy = {
   followerCount: InputMaybe<OrderBy>;
   followingCount: InputMaybe<OrderBy>;
   profileCreatedAtBlockTimestamp: InputMaybe<OrderBy>;
+  updatedAt: InputMaybe<OrderBy>;
 };
 
 export type SocialsInput = {
@@ -1567,6 +1570,14 @@ export type FetchErc20InCommonQueryQueryVariables = Exact<{
 
 
 export type FetchErc20InCommonQueryQuery = { TokenBalances: { TokenBalance: Array<{ token: { tokenBalances: Array<{ id: string, token: { address: any, symbol: string | null, name: string | null } | null }> | null } | null }> | null } | null };
+
+export type FetchIsFollowingOnFarcasterQueryQueryVariables = Exact<{
+  identityA: Scalars['Identity']['input'];
+  identityB: Scalars['Identity']['input'];
+}>;
+
+
+export type FetchIsFollowingOnFarcasterQueryQuery = { Wallet: { socialFollowers: { Follower: Array<{ dappName: string | null, dappSlug: string | null, followingProfileId: string | null, followerProfileId: string | null, followingAddress: { addresses: Array<any> | null, socials: Array<{ dappName: SocialDappName | null, profileName: string | null }> | null, domains: Array<{ name: string | null }> | null } | null }> | null } | null } | null };
 
 export type FetchFarcasterFollowingsInCommonQueryQueryVariables = Exact<{
   a: Scalars['Identity']['input'];

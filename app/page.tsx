@@ -1,19 +1,20 @@
 import { getFrameMetadata } from '@coinbase/onchainkit';
 import type { Metadata } from 'next';
+import { BASE_URL } from './constants';
 
 const frameMetadata = getFrameMetadata({
-  buttons: ['ofc 🍋', "idk let's see 👀", "who da fk are u again!?🙄"],
-  image: 'https://are-we-frens-frame.vercel.app/base-img.png',
-  post_url: 'https://are-we-frens-frame.vercel.app/api/frame',
+  buttons: ['ofc 🍋', "idk let's see 👀", 'who da fk are u again sry!?🙄'],
+  image: `${BASE_URL}/base-img.png`,
+  post_url: `${BASE_URL}/api/frame`,
 });
 
 export const metadata: Metadata = {
-  title: 'are-we-frens-frame.vercel.app',
-  description: 'are we frens?',
+  title: 'are we frens?',
+  description: 'seriously, are we?',
   openGraph: {
-    title: 'are-we-frens-frame.vercel.app',
-    description: 'are we frens?',
-    images: ['https://are-we-frens-frame.vercel.app/base-img.png'],
+    title: 'are we frens?',
+    description: 'seriously, are we?',
+    images: [`${BASE_URL}/base-img.png`],
   },
   other: {
     ...frameMetadata,

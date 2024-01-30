@@ -1,9 +1,9 @@
 import { join } from 'path';
 import satori from 'satori';
 import * as fs from 'fs';
-import Grid from '../components/grid';
 import { TokenBlockchain } from './airstack/types';
 import Avatar from '../components/avatar';
+import { BASE_URL } from '../constants';
 
 const fontPath = join(process.cwd(), 'HirukoBlackAlternate.ttf');
 let fontData = fs.readFileSync(fontPath);
@@ -21,40 +21,54 @@ export interface Profile {
   username: string;
 }
 
-export const generateImageSvg = async (
-  profile: Profile,
-  erc20inCommon: TokenItem[],
-  nftsInCommon: TokenItem[],
-  poapsInCommon: number,
-  farcasterFollowingsInCommon: number,
-  score: number,
-): Promise<string> => {
+export const generateImageSvg = async (profile: Profile, score: string): Promise<string> => {
   return await satori(
     <div
       style={{
         backgroundColor: '#BDE86B',
         display: 'flex',
-        flexDirection: 'row',
-        padding: '0.5rem',
-        alignItems: 'center',
+        flexDirection: 'column',
+        padding: '2rem',
         width: '100%',
         height: '100%',
+        alignContent: 'center',
         justifyContent: 'space-around',
       }}
     >
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <img src={BASE_URL + '/are-we-frens.png'} width={'145px'} height={'32px'} />
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '2rem',
+          marginTop: '32px',
+        }}
+      >
         <div
           style={{
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-around',
-            gap: '1rem',
+            gap: '2rem',
           }}
         >
-          <Avatar imageUrl={`${process.env.BASE_URL}/limone-pfp.png`} username="limone.eth" />
+          <Avatar
+            imageUrl={`${process.env.BASE_URL}/limone-pfp.png`}
+            username="limone.eth"
+            size="96px"
+          />
           <div style={{ fontSize: '24px' }}>&</div>
-          <Avatar imageUrl={profile.imageUrl} username={profile.username} />
+          <Avatar imageUrl={profile.imageUrl} username={profile.username} size="96px" />
         </div>
         <div
           style={{
@@ -67,21 +81,29 @@ export const generateImageSvg = async (
             style={{
               fontSize: '64px',
               display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'flex-end',
+              gap: '0.5rem',
               color: '#FFDE37',
-              textShadow: '0 0 10px #855F06, 0 0 10px #855F06, 0 0 10px #855F06, 0 0 10px #855F06'
+              textShadow: '0 0 10px #855F06, 0 0 10px #855F06, 0 0 10px #855F06, 0 0 10px #855F06',
             }}
           >
             {score}
+            <span style={{ fontSize: '32px' }}>/10</span>
           </div>
           <div style={{ fontSize: '32px' }}>frens score</div>
         </div>
       </div>
-      <Grid
-        poaps={{ logo: '/poap.png', number: poapsInCommon }}
-        erc20={erc20inCommon.map((item) => ({ logo: `/${item.chain}.png`, number: item.value }))}
-        nfts={nftsInCommon.map((item) => ({ logo: `/${item.chain}.png`, number: item.value }))}
-        farcasterFollowings={{ logo: '/farcaster.png', number: farcasterFollowingsInCommon }}
-      />
+      <span
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          fontSize: '12px',
+        }}
+      >
+        *based on nfts, poaps and farcaster followings in common
+      </span>
     </div>,
     {
       width: 600,
