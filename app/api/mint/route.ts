@@ -19,7 +19,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     if (!validateFrameAction) {
       throw new Error('Invalid frame action');
     }
-    username = validateFrameAction.interactor?.username!;
+    console.log({ validateFrameAction });
+    username = validateFrameAction.action?.interactor.username!;
   } catch (err) {
     console.error(err);
   }
