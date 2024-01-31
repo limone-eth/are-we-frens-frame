@@ -52,5 +52,5 @@ export const fetchNFTImage = async (address: string) => {
   ) {
     return false;
   }
-  return data.TokenBalances?.TokenBalance[0].tokenNfts!.contentValue!.image!.medium;
+  return data.TokenBalances?.TokenBalance[0].tokenNfts!.contentValue?.image?.medium;
 };
