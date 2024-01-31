@@ -65,6 +65,8 @@ export const GET = async (req: Request, res: Response) => {
 
   await setImage(pngBuffer, address);
 
+  console.log('image set for', address);
+
   // Set the content type to PNG and send the response
   return new Response(pngBuffer, {
     headers: {
