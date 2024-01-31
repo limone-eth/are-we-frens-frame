@@ -14,6 +14,6 @@ export const computeScore = (
     (followedByOnFarcaster ? SCORE_MAP.followedByOnFarcaster : 0) +
     (followingOnFarcaster ? SCORE_MAP.followingOnFarcaster : 0);
 
-  // normalize between 0 and 10 knowing that the max value of score is 3598
-  return ((score / 3598) * 10).toFixed(2);
+  // normalize between 0 and 10 knowing that the max value of score is 3613
+  return ((score / 3613) * 10).toFixed(2);
 };
