@@ -54,6 +54,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     return new NextResponse(`<!DOCTYPE html><html><head>
     <meta property="fc:frame" content="vNext" />
     <meta property="fc:frame:image" content="${SUCCESS_IMAGE_URL}" />
+    <meta property="fc:frame:button:1" content="get your image and post it below ✨" />
+    <meta property="fc:frame:button:1:action" content="post_redirect" />
+    <meta property="fc:frame:post_url" content="${BASE_URL}/api/redirect?address=${accountAddress}" />
     </head></html>`);
   }
   console.log('claiming', accountAddress);
