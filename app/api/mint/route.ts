@@ -2,17 +2,26 @@ import { NextRequest, NextResponse } from 'next/server';
 import { alreadyClaimed, claimNFT } from '../../lib/thirdweb';
 import { readImage, setClaimed } from '../../lib/redis';
 import { NeynarAPIClient } from '@neynar/nodejs-sdk';
-import { getFrameAccountAddress } from '@coinbase/onchainkit';
+import { FrameRequest, getFrameAccountAddress, getFrameMessage } from '@coinbase/onchainkit';
 import { BASE_URL, INITIAL_IMAGE_URL, SUCCESS_IMAGE_URL } from '../../constants';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   let accountAddress = '';
   let username = '';
   try {
-    const body: { trustedData?: { messageBytes?: string } } = await req.json();
-    accountAddress = await getFrameAccountAddress(body, {
-      NEYNAR_API_KEY: process.env.NEYNAR_API_KEY,
-    });
+    const body: FrameRequest = await req.json();
+    // Step 3. Validate the message
+    const { isValid, message } = await getFrameMessage(body);
+
+    // Step 4. Determine the experience based on the validity of the message
+    if (isValid) {
+      // Step 5. Get from the message the Account Address of the user using the Frame
+      accountAddress = (await getFrameAccountAddress(message, {
+        NEYNAR_API_KEY: process.env.NEYNAR_API_KEY,
+      })) as string;
+    } else {
+      throw new Error("The message isn't valid");
+    }
     // make sure to set your NEYNAR_API_KEY .env
     const client = new NeynarAPIClient(process.env.NEYNAR_API_KEY!);
     const validateFrameAction = await client.validateFrameAction(body.trustedData?.messageBytes!);

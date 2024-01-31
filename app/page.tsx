@@ -3,7 +3,11 @@ import type { Metadata } from 'next';
 import { BASE_URL } from './constants';
 
 const frameMetadata = getFrameMetadata({
-  buttons: ['ofc 🍋', "idk let's see 👀", 'who da fk r u again!? 🙄'],
+  buttons: [
+    { label: 'ofc 🍋' },
+    { label: "idk let's see 👀" },
+    { label: 'who da fk r u again!? 🙄' },
+  ],
   image: `${BASE_URL}/base-img.png`,
   post_url: `${BASE_URL}/api/frame`,
 });

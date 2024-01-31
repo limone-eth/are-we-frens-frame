@@ -17,7 +17,7 @@
   "dependencies": {
     "@airstack/node": "^0.0.5",
     "@apollo/client": "^3.8.10",
-    "@coinbase/onchainkit": "^0.1.5",
+    "@coinbase/onchainkit": "^0.3.0",
     "@thirdweb-dev/sdk": "^4.0.28",
     "@vercel/blob": "^0.20.0",
     "@vercel/kv": "^1.0.1",
