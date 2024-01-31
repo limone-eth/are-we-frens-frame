@@ -1587,6 +1587,13 @@ export type FetchFarcasterFollowingsInCommonQueryQueryVariables = Exact<{
 
 export type FetchFarcasterFollowingsInCommonQueryQuery = { SocialFollowings: { Following: Array<{ followingAddress: { socialFollowings: { Following: Array<{ followingAddress: { socials: Array<{ fnames: Array<string | null> | null, profileName: string | null, userId: string | null, userAssociatedAddresses: Array<any> | null }> | null } | null }> | null } | null } | null }> | null } | null };
 
+export type GetNftOwnedByAddressQueryQueryVariables = Exact<{
+  address: Scalars['Address']['input'];
+}>;
+
+
+export type GetNftOwnedByAddressQueryQuery = { TokenBalances: { TokenBalance: Array<{ tokenAddress: any, amount: string, tokenType: TokenType | null, tokenNfts: { tokenId: string, contentValue: { image: { medium: string | null } | null } | null } | null }> | null } | null };
+
 export type FetchNfTsInCommonQueryQueryVariables = Exact<{
   a: Scalars['Identity']['input'];
   b: Scalars['Identity']['input'];
