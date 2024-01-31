@@ -89,7 +89,7 @@ export const generateImageSvg = async (profile: Profile, score: string): Promise
             }}
           >
             {score}
-            <span style={{ fontSize: '28px' }}>/10</span>
+            <span style={{ fontSize: '36px' }}>/10</span>
           </div>
           <div style={{ fontSize: '28px' }}>frens score</div>
         </div>
