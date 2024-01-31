@@ -13,12 +13,12 @@ interface Error {
 const query =
   /* GraphQL */
   `
-    query GetNFTOwnedByAddressQuery($address: Address!) {
+    query GetNFTOwnedByAddressQuery($address: Identity!) {
       TokenBalances(
         input: {
           filter: {
-            owner: { _eq: "0x7b8691A5Add303acf49e9ff51134D501C7d012f2" }
-            tokenAddress: { _eq: $address }
+            owner: { _eq: $address }
+            tokenAddress: { _eq: "0xc52421df5a3a1914cb75cafcfdad66dc86570a2d" }
           }
           blockchain: base
           limit: 10
@@ -43,6 +43,7 @@ const query =
 
 export const fetchNFTImage = async (address: string) => {
   const { data, error }: QueryResponse = await fetchQuery(query, { address });
+  console.log(data, error);
   if (
     error ||
     !data ||
