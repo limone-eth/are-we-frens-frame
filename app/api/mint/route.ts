@@ -46,6 +46,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     console.log('no image', accountAddress);
     return new NextResponse('Error: no image', { status: 400 });
   }
+  console.log('image found for', accountAddress);
+  console.log('now checking if already claimed', accountAddress);
   const didClaim = await alreadyClaimed(accountAddress);
   if (didClaim) {
     console.log('already claimed', accountAddress);

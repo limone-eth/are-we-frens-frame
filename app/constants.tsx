@@ -23,4 +23,4 @@ export const BASE_NFT_COLLECTION_ADDRESS =
     ? '0xc52421dF5a3A1914Cb75CAFcFdAd66DC86570A2D'
     : '0x1A4AE61DcfefAE5E2214A4eBd8384502D0BA0448';
 
-export const CHAIN = process.env.NODE_ENV === 'production' ? 'base-goerli' : 'base-goerli';
+export const CHAIN = process.env.NODE_ENV === 'production' ? 'base' : 'base-goerli';
